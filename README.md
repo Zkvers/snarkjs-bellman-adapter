@@ -106,7 +106,7 @@ if you want to use bellman to verify the proof in `no_std` environment, you can 
 
 ```toml
 [dependencies]
-bellman-verifier = { git = "https://github.com/DoraFactory/snarkjs-bellman-adapter.git", default-features = false, version = "0.1.0"}
+bellman-verifier = { git = "https://github.com/ZK-Space/snarkjs-bellman-adapter.git", default-features = false, version = "0.1.0"}
 
 [features]
 default = ["std"]
