@@ -1,6 +1,5 @@
 pub mod parser;
 pub mod types;
-use ff::PrimeField as Fr;
 pub use parser::{parse_proof, parse_vkey};
 pub use types::{ProofStr, VkeyStr};
 
