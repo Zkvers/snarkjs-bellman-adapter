@@ -5,9 +5,9 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-file_names=("inputs.json")
+file_names=("inputs.json" "package.json")
 
-file_suffixes=(".circom" ".js")
+file_suffixes=(".circom" ".js" "md")
 
 dir_path="./circuit/$1"
 

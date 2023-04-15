@@ -1,0 +1,2 @@
+# Merkle Tree Circuit
+A zero-knowledge proof circuit used to validate the existence of a Merkle tree leaf node. Its main function is to prove that the given leaf node actually exists in the given Merkle tree while maintaining the privacy of path information and leaf node position. This is the simplest example of constructing a rollup, and in actual applications, more complex operations will be designed, such as accounts, funds, and so on.
