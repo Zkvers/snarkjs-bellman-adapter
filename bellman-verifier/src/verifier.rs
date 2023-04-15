@@ -6,6 +6,7 @@ use super::{PreparedVerifyingKey, Proof, VerifyingKey, VerificationError};
 
 use sp_std::ops::{AddAssign, Neg};
 
+// prepare the pre-verification key
 pub fn prepare_verifying_key<E: MultiMillerLoop>(vk: &VerifyingKey<E>) -> PreparedVerifyingKey<E> {
 
     let gamma = vk.gamma_g2.neg();
@@ -19,6 +20,7 @@ pub fn prepare_verifying_key<E: MultiMillerLoop>(vk: &VerifyingKey<E>) -> Prepar
     }
 }
 
+// verify the proof by proof, verification key and public signal
 pub fn verify_proof<'a, E: MultiMillerLoop>(
     pvk: &'a PreparedVerifyingKey<E>,
     proof: &Proof<E>,
