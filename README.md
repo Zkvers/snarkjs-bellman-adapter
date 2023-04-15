@@ -56,7 +56,7 @@ cargo build --release
 Generate proof and verification key with `circuit.circom` and `inputs.json` in the dir `circuit` of this project by `start.sh`.
 
 ```
-./start.sh
+./start.sh multiplication
 ```
 
 
@@ -66,18 +66,18 @@ You have generated `proof.json` and `verification_key.json`，now you can go to 
 
 ```
 cd prove && npm install
-cd src && node adapter.js
+cd src && node adapter.js multiplication
 ```
 
-After that, you can see the generated uncompressed data files `proof_uncompressed.json` and `vkey_uncompressed.json`.
+After that, you can see the generated uncompressed data files `proof_uncompressed.json` and `vkey_uncompressed.json` of `multiplication` circuit.
 
 ### 3. Encode the uncompressed data into Affine and Verify
 
-Go to the directory `verify/src/adapter` and run the test:
+Go to the directory `verify/src/adapter` and run the test(here we will test `multiplication` circuit):
 
 ```
 cd ../../verify/src/adapter
-cargo test snark_proof_bellman_verify -- --nocapture
+CIRCUIT_DIR_NAME=multiplication cargo test snark_proof_bellman_verify -- --nocapture
 ```
 
 if you see the below output, which means the verification passed.
@@ -91,12 +91,13 @@ test adapter::snark_proof_bellman_verify ... ok
 test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
 ```
 
+> If you want to clean all the proof and verification key, you can run `./clean.sh your_circuit_dir_name` in snarkjs-bellman-adapter.
+
 ## Customize zk circuit and verify
 
 For customized circuits, you need to:
-- modify the `circuit.circom` and `inputs.json` in the dir `circuit`
-- modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` in the `verify/src/adapter/mod.rs`
-
+- Write the `circuit.circom` and `inputs.json` into the dir `circuit/{your customize dir}`. When you want to test your circuit, you can only change the arg with above execution command with the `circuit dir name`
+- Modify the public parameter of the function `Fr::from_str_vartime("xxxxxx")` in the `verify/src/adapter/mod.rs`
 
 ## Bellman-verifier with `no_std`
 

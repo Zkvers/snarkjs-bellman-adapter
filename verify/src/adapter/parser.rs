@@ -7,13 +7,14 @@ use super::{ProofStr, VkeyStr};
 use std::path::PathBuf;
 use std::fs;
 
-pub fn parse_proof<E>() -> Proof<E>
+pub fn parse_proof<E>(circuit_name: &str) -> Proof<E>
 where
     E: Engine<G1Affine = G1Affine, G2Affine = G2Affine>,
 {
     let mut config_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     config_path.pop();
     config_path.push("circuit");
+    config_path.push(circuit_name);
     config_path.push("proof_uncompressed.json");
     let ff = fs::read_to_string(config_path.as_path()).unwrap();
     let pof: ProofStr = serde_json::from_str(&ff).unwrap();
@@ -48,13 +49,14 @@ where
     }
 }
 
-pub fn parse_vkey<E>() -> VerifyingKey<E>
+pub fn parse_vkey<E>(circuit_name: &str) -> VerifyingKey<E>
 where
 E: Engine<G1Affine = G1Affine, G2Affine = G2Affine>,
 {
     let mut config_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
     config_path.pop();
     config_path.push("circuit");
+    config_path.push(circuit_name);
     config_path.push("vkey_uncompressed.json");
     let ff = fs::read_to_string(config_path.as_path()).unwrap();
     let vk: VkeyStr = serde_json::from_str(&ff).unwrap();

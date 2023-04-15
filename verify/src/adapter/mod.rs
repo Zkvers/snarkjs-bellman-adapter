@@ -1,26 +1,45 @@
 pub mod parser;
 pub mod types;
-pub use parser::{parse_proof, parse_vkey};
-pub use types::{ProofStr, VkeyStr};
 use ff::PrimeField as Fr;
+pub use parser::{parse_proof, parse_vkey};
+use std::env;
+pub use types::{ProofStr, VkeyStr};
 
 #[test]
 pub fn snark_proof_bellman_verify() {
-    use bellman::groth16::{
-        prepare_verifying_key, verify_proof,
-    };
-    use bls12_381::Bls12;
+	let arg_value = match env::var("CIRCUIT_DIR_NAME") {
+		Ok(value) => {
+			if value.is_empty() {
+				eprintln!("Error: CIRCUIT_DIR_NAME arg is empty.");
+				assert!(false);
+				return;
+			}
+			value
+		},
+		Err(e) => {
+			eprintln!("Error: Failed to get CIRCUIT_DIR_NAME: {}", e);
+			assert!(false);
+			return;
+		},
+	};
 
-    println!(">>>>start encode the uncompressed data to Affine<<<<<");
+	println!("THE CIRCUIT YOU ARE TESTING IS : {}", arg_value);
 
-    let pof =  parse_proof::<Bls12>();
+	let circuit_name = arg_value.as_str();
 
-    let verificationkey =  parse_vkey::<Bls12>();
+	use bellman::groth16::{prepare_verifying_key, verify_proof};
+	use bls12_381::Bls12;
 
-    let pvk =  prepare_verifying_key(&verificationkey);
+	println!(">>>>start encode the uncompressed data to Affine<<<<<");
 
-    assert!(verify_proof(&pvk, &pof, &[Fr::from_str_vartime("33").unwrap()]).is_ok());
+	let pof = parse_proof::<Bls12>(circuit_name);
 
-    println!(">>>>end verification<<<<<<<");
+	let verificationkey = parse_vkey::<Bls12>(circuit_name);
 
+	let pvk = prepare_verifying_key(&verificationkey);
+
+    // "33" is the public signal
+	assert!(verify_proof(&pvk, &pof, &[Fr::from_str_vartime("33").unwrap()]).is_ok());
+
+	println!(">>>>end verification<<<<<<<");
 }

@@ -1,7 +1,9 @@
 #!/bin/sh
 
 compile_and_ts_and_witness() {
+  circuit_dir_name=$1
 
+  cd ${circuit_dir_name}
   # start a new powers of tou ceremony(bls12_381)
   snarkjs powersoftau new bls12_381 12 pot12_0000.ptau -v
 
@@ -72,6 +74,12 @@ compile_and_ts_and_witness() {
   snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
 }
 
+if [ $# -eq 0 ]; then
+  echo "Usage: $0 <circuit_dir_name>"
+  exit 1
+fi
+
+circuit_dir_name=$1
 echo "compile & trustesetup for circuit"
-cd circuit
-compile_and_ts_and_witness
+cd circuit/
+compile_and_ts_and_witness "$circuit_dir_name"
