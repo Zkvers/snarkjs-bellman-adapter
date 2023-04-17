@@ -72,6 +72,9 @@ compile_and_ts_and_witness() {
 
   # generate proof
   snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
+
+  # verify proof by snarkjs
+  snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
 }
 
 if [ $# -eq 0 ]; then
