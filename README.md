@@ -56,7 +56,7 @@ cargo build --release
 Generate proof and verification key with `circuit.circom` and `inputs.json` in the dir `circuit` of this project by `start.sh`.
 
 ```
-./start.sh multiplication
+./start.sh Multiplication
 ```
 
 
@@ -66,18 +66,18 @@ You have generated `proof.json` and `verification_key.json`，now you can go to 
 
 ```
 cd prove && npm install
-cd src && node adapter.js multiplication
+cd src && node adapter.js Multiplication
 ```
 
-After that, you can see the generated uncompressed data files `proof_uncompressed.json` and `vkey_uncompressed.json` of `multiplication` circuit.
+After that, you can see the generated uncompressed data files `proof_uncompressed.json` and `vkey_uncompressed.json` of `Multiplication` circuit.
 
 ### 3. Encode the uncompressed data into Affine and Verify
 
-Go to the directory `verify/src/adapter` and run the test(here we will test `multiplication` circuit):
+Go to the directory `verify/src/adapter` and run the test(here we will test `Multiplication` circuit and pass the public input parameter with `33`):
 
 ```
 cd ../../verify/src/adapter
-CIRCUIT_DIR_NAME=multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_verify -- --nocapture
+CIRCUIT_DIR_NAME=Multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_verify -- --nocapture
 ```
 
 if you see the below output, which means the verification passed.
