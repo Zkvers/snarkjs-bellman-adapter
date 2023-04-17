@@ -39,11 +39,11 @@ compile_and_ts_and_witness() {
 
   #  export the r1cs to json
   snarkjs r1cs export json circuit.r1cs circuit.r1cs.json
-  cat circuit.r1cs.json
+  # cat circuit.r1cs.json
 
   echo "calculating witness"
   cd circuit_js
-  node generate_witness.js circuit.wasm ../inputs.json ../witness.wtns
+  node generate_witness.js circuit.wasm ../input.json ../witness.wtns
   cd ..
 
   #setup the phase 2 circuit ceremony

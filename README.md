@@ -77,7 +77,7 @@ Go to the directory `verify/src/adapter` and run the test(here we will test `mul
 
 ```
 cd ../../verify/src/adapter
-CIRCUIT_DIR_NAME=multiplication cargo test snark_proof_bellman_verify -- --nocapture
+CIRCUIT_DIR_NAME=multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_verify -- --nocapture
 ```
 
 if you see the below output, which means the verification passed.

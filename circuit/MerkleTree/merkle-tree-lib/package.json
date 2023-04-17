@@ -1,0 +1,20 @@
+{
+  "name": "@webb-tools/merkle-tree",
+  "main": "./lib/index.js",
+  "license": "GPL-3.0-or-later",
+  "author": "Webb Developers <drew@webb.tools>",
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rimraf -rf ./lib",
+    "compile": "tsc -p tsconfig.build.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "directory": "packages/merkle-tree",
+    "type": "git",
+    "url": "git://github.com/webb-tools/protocol-solidity.git"
+  },
+  "version": "0.1.14"
+}

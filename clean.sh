@@ -5,14 +5,14 @@ if [ $# -eq 0 ]; then
   exit 1
 fi
 
-file_names=("inputs.json" "package.json")
+file_names=("input.json" "package.json")
 
 file_suffixes=(".circom" ".js" "md")
 
 dir_path="./circuit/$1"
 
 # first delete file in circuit/xxxx
-find "$dir_path" -type f | while read file_path; do
+find "$dir_path" -type f -not -path "$dir_path/node_modules" | while read file_path; do
   file_name=$(basename "$file_path")
   file_suffix="${file_name##*.}"
 
