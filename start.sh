@@ -39,7 +39,6 @@ compile_and_ts_and_witness() {
 
   #  export the r1cs to json
   snarkjs r1cs export json circuit.r1cs circuit.r1cs.json
-  # cat circuit.r1cs.json
 
   echo "calculating witness"
   cd circuit_js
@@ -74,7 +73,8 @@ compile_and_ts_and_witness() {
   snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
 
   # verify proof by snarkjs
-  snarkjs groth16 prove circuit_final.zkey witness.wtns proof.json public.json
+  snarkjs groth16 verify verification_key.json public.json proof.json
+
 }
 
 if [ $# -eq 0 ]; then
