@@ -45,9 +45,6 @@ pub fn snark_proof_bellman_verify() {
 	let circuit_dir_name = arg1_value.as_str();
 	let public_input = arg2_value.as_str();
 
-	println!("{}", circuit_dir_name);
-	println!("{}", public_input);
-
 	use bellman::groth16::{prepare_verifying_key, verify_proof};
 	use bls12_381::Bls12;
 

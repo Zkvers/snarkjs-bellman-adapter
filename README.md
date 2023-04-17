@@ -73,17 +73,19 @@ After that, you can see the generated uncompressed data files `proof_uncompresse
 
 ### 3. Encode the uncompressed data into Affine and Verify
 
-Go to the directory `verify/src/adapter` and run the test(here we will test `Multiplication` circuit and pass the public input parameter with `33`):
+Go to the directory `verify/src/adapter` and run the test(here we will pass two environment variables with `Multiplication` (circuit dir name) and public input parameter with `33` where **a*b =33**, a and b are private but 33 is public):
 
 ```
 cd ../../verify/src/adapter
 CIRCUIT_DIR_NAME=Multiplication PUBLIC_INPUT=33 cargo test snark_proof_bellman_verify -- --nocapture
 ```
 
-if you see the below output, which means the verification with bellman passed.
+If you see the below output, which means the verification with bellman passed.
 
 ```
 running 1 test
+THE CIRCUIT YOU ARE TESTING IS : Multiplication
+PUBLIC INPUT is : 33
 >>>>start encode the uncompressed data to Affine<<<<<
 >>>>end verification<<<<<<<
 test adapter::snark_proof_bellman_verify ... ok
